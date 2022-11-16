@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* Страница Фредди */
-router.get('/Freddy', function(req, res, next) {
+router.get('/freddy', function(req, res, next) {
   res.render('fnaf', {
     title: "Фредди",
     picture: "images/Freddy.jpg",
@@ -16,7 +16,7 @@ router.get('/Freddy', function(req, res, next) {
 });
 
 /* Страница Бонни */
-router.get('/Bonnie', function(req, res, next) {
+router.get('/bonnie', function(req, res, next) {
   res.render('fnaf', {
     title: "Бонни",
     picture: "images/Bonnie.jpg",
@@ -25,7 +25,7 @@ router.get('/Bonnie', function(req, res, next) {
 });
 
 /* Страница Чики */
-router.get('/Chica', function(req, res, next) {
+router.get('/chica', function(req, res, next) {
   res.render('fnaf', {
     title: "Чика",
     picture: "images/Chica.jpg",
@@ -34,7 +34,7 @@ router.get('/Chica', function(req, res, next) {
 });
 
 /* Страница Фокси */
-router.get('/Foxy', function(req, res, next) {
+router.get('/foxy', function(req, res, next) {
   res.render('fnaf', {
     title: "Фокси",
     picture: "images/Foxy.png",
