@@ -7,9 +7,9 @@ schema.methods.freedom = function(){
     console.log(this.get("name") + " крикнул freedom")
 }
 
-var fnaf = mongoose.model('fnaf', schema)
+var Animatronic = mongoose.model('Animatronic', schema)
 
-var withered = new fnaf({ name: 'Withered Foxy' })
-withered.save(function (err) {
-    withered.freedom()
+var endoskeleton = new Animatronic({ name: 'Withered Foxy' })
+endoskeleton.save(function (err) {
+    endoskeleton.freedom()
 })
