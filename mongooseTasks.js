@@ -1,15 +1,16 @@
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/test')
+mongoose.connect('mongodb://127.0.0.1:27017/test1')
 
-var schema = mongoose.Schema({ name: String })
+var Animatronic = require("./models/animatronic").Animatronic
 
-schema.methods.freedom = function(){
-    console.log(this.get("name") + " крикнул freedom")
-}
 
-var fnaf = mongoose.model('fnaf', schema)
+var animatronic = new Animatronic({
+    title: "Фазбер",
+    nick: "Fazbear"
+})
 
-var withered = new fnaf({ name: 'Withered Foxy' })
-withered.save(function (err) {
-    withered.freedom()
+
+console.log(animatronic)
+animatronic.save(function(err, animatronic, affected){
+    console.log(animatronic.title)
 })
