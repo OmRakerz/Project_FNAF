@@ -7,8 +7,16 @@ router.get('/', function(req, res, next) {
 });
 
 /* Страница аниматроников */
-router.get("/:nick", function(req, res, next) {
-    res.send(req.params.nick);
-    });
+router.get('/:nick', function(req, res, next) {
+    Animatronic.findOne({nick:req.params.nick}, function(err,Animatronic){
+        if(err) return next(err)
+        if(!animatronic) return next(new Error("Нет такого аниматроника в этой части"))
+        res.render('animatronic', {
+            title: animatronic.title,
+            picture: animatronic.avatar,
+            desc: animatronic.desc
+        })
+    })
+})
 
 module.exports = router;
