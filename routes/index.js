@@ -1,10 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
+var Cat = require("../models/animatronic").Animatronic
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+  Animatronic.find({}, { _id: 0, title: 1, nick: 1 }, function (err, menu) {
+    res.render('index', {
+      title: 'Express',
+      menu: menu
+    });
+  })
+
 });
+
 
 /* Страница Фредди 
 router.get('/freddy', function(req, res, next) {
