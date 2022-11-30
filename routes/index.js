@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* Страница Фредди */
+/* Страница Фредди 
 router.get('/freddy', function(req, res, next) {
   res.render('fnaf', {
     title: "Фредди",
@@ -15,7 +15,7 @@ router.get('/freddy', function(req, res, next) {
   });
 });
 
-/* Страница Бонни */
+/* Страница Бонни 
 router.get('/bonnie', function(req, res, next) {
   res.render('fnaf', {
     title: "Бонни",
@@ -24,7 +24,7 @@ router.get('/bonnie', function(req, res, next) {
   });
 });
 
-/* Страница Чики */
+/* Страница Чики 
 router.get('/chica', function(req, res, next) {
   res.render('fnaf', {
     title: "Чика",
@@ -33,7 +33,7 @@ router.get('/chica', function(req, res, next) {
   });
 });
 
-/* Страница Фокси */
+/* Страница Фокси 
 router.get('/foxy', function(req, res, next) {
   res.render('fnaf', {
     title: "Фокси",
@@ -41,5 +41,5 @@ router.get('/foxy', function(req, res, next) {
     desc: "Фокси представляет из себя антропоморфного лиса-пирата грязно-красного окраса. Он обладает стройным телосложением и средним ростом. Корпус Фокси сделан из потрёпанного плюша, в дырах которого виден эндоскелет. Фокси имеет тонкие конечности с плотно прилегающими накладками на плечах. У него суставчатые металлические ладони. Как и у других Классических аниматроников, на руках Фокси всего по 4 пальца, на голых ногах — только 2. Туловище лиса вытянутое, с животом светло-рыжего цвета."
   });
 });
-
+*/
 module.exports = router;
