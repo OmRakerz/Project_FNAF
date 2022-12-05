@@ -5,7 +5,7 @@ var async = require("async")
 
     /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.send('Новый маршрутизатор, для маршрутов, начинающихся с animatronics');
+    res.send('Новый маршрутизатор, для маршрутов, начинающихся с animatronics')
 });
 /* Страница аниматроников */
 router.get('/:nick', function(req, res, next) {
