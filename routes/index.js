@@ -6,7 +6,8 @@ var Animatronic = require("../models/animatronic").Animatronic
 /* GET home page(Главая страница). */
 router.get('/', function (req, res, next) {
   Animatronic.find({}, { _id: 0, title: 1, nick: 1 }, function (err, menu) {
-      res.cookie('greeting', 'Hi!!!').render('index', { 
+    req.session.greeting = "Hi!!!",
+    res.cookie('greeting', 'Hi!!!').render('index', { 
       title: 'Express',
       menu: menu
     });
