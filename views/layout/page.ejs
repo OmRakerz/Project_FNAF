@@ -18,13 +18,21 @@
         <ul class="navbar-nav">
           <a class="nav-link" href="/">Five Nights at Freddy's</a>
 
-          <% menu.forEach(function(animatronic){ %>
+          <% if(typeof nav == 'object' && nav){
+          nav.forEach(function(animatronic){ %>
+          <li class="nav-item">
+            <a class="nav-link" href="/animatronics/<%=animatronic.nick%>"
+              ><%=animatronic.title%></a
+            >
+          </li>
+          <% })} %>
+          <!-- <% menu.forEach(function(animatronic){ %>
           <li class="nav-item">
             <a class="nav-link" href="/animatronics/<%=animatronic.nick%>">
               <%=animatronic.title%>
             </a>
           </li>
-          <% }) %>
+          <% }) %> -->
         </ul>
         <ul class="navbar-nav navbar-right">
           <li>
