@@ -1,4 +1,4 @@
-var Animatronic = require("../models/animatronic").Animatronic
+var Animatronic = require("./../models/animatronic").Animatronic
 
 module.exports = function(req,res,next){
     res.locals.nav = []

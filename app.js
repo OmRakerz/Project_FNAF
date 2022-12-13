@@ -8,7 +8,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/fnaf')
 
 var session = require('express-session');
 
-var Animatronic = require("./models/animatronic").Animatronic
+var Animatronic = require("./models/animatronic").Animatronic;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -52,7 +52,6 @@ app.use(function(req,res,next){
 })
 
 app.use(require("./middleware/createMenu.js"))
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
