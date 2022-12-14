@@ -13,9 +13,14 @@ router.get('/', function (req, res, next) {
       counter:req.session.counter
     });
   })
-
 });
 
+/* Страница регистрации */
+router.get('/logreg', function(req, res, next){
+  res.render('logreg',{
+    title: 'Вход'
+  });
+})
 
 /* Страница Фредди 
 router.get('/freddy', function(req, res, next) {
