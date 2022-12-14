@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Animatronic = require("../models/animatronic").Animatronic
+var User = require("./../models/user").User
 
 /* GET home page(Главая страница). */
 router.get('/', function (req, res, next) {
