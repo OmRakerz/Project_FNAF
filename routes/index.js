@@ -22,6 +22,12 @@ router.get('/logreg', function(req, res, next){
   });
 })
 
+router.post('/logreg', function(req, res, next){
+  var username = req.body.username;
+  var password = req.body.password;
+})
+
+
 /* Страница Фредди 
 router.get('/freddy', function(req, res, next) {
   res.render('fnaf', {
