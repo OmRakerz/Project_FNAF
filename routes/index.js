@@ -26,11 +26,6 @@ router.get('/logreg', function(req, res, next){
 router.post('/logreg', function(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
-})
-
-router.post('/logreg', function(req, res, next){
-  var username = req.body.username;
-  var password = req.body.password;
 
   User.findOne({username:username},function(err,user){
     if(err) return next(err)
