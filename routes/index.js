@@ -3,6 +3,7 @@ var router = express.Router();
 
 var Animatronic = require("../models/animatronic").Animatronic
 var User = require("./../models/user").User
+var checkAuth = require("./../middleware/checkAuth")
 
 /* GET home page(Главая страница). */
 router.get('/', function (req, res, next) {

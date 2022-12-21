@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 var Animatronic = require("../models/animatronic").Animatronic
 var async = require("async");
+var checkAuth = require("./../middleware/checkAuth")
 
     /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('Новый маршрутизатор, для маршрутов, начинающихся с animatronics')
 });
 /* Страница аниматроников */
-router.get('/:nick', function(req, res, next) {
+router.get('/:nick', checkAuth, function(req, res, next) {
     
     Animatronic.findOne({nick:req.params.nick}, function(err,animatronic){
         if(err) return next(err)
