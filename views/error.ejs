@@ -1,3 +1,8 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% layout('./layout/page.ejs') %>
+<div class="error">
+  <h2><%= error.status %></h2>
+  <h2><%= title %></h2>
+  <img src="/images/error404.jpg" alt="Error" class="error404-jpg" / >
+  <pre> <%= error.stack %> </pre>
+  <h1><%= message %></h1>
+</div>
