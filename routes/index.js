@@ -48,6 +48,12 @@ router.post('/logreg', function(req, res, next){
   })
 });
 
+/* logout */
+router.post('/logout', function(req, res, next) {
+  req.session.destroy()
+  res.locals.user = null
+  res.redirect('/')
+});
 
 /* Страница Фредди 
 router.get('/freddy', function(req, res, next) {
