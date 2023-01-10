@@ -3,10 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/fnaf')
+// var mongoose = require('mongoose');
+var mysql2 = require('mysql2/promise');
+
+
+// mongoose.connect('mongodb://127.0.0.1:27017/fnaf')
 
 var session = require('express-session');
+
+var MySQLStore = require('express-mysql-session')(session);
+
 
 var Animatronic = require("./models/animatronic").Animatronic;
 
@@ -16,6 +22,17 @@ var animatronics = require('./routes/animatronics')
 
 var app = express();
 
+var options = {
+  host : 'localhost',
+  port: '3306',
+  user : 'admin',
+  password : '1212456Nmk',
+  database: 'fnaf'
+};
+  var connection = mysql2.createPool(options)
+  var sessionStore = new MySQLStore(options, connection);
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -24,17 +41,31 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 
-var MongoStore = require('connect-mongo'); (session);
+
 app.use(session({
-  secret: "fnaf",
-  cookie: {maxAge:60*1000},
+  secret: 'fnaf',
+  key: 'sid',
+  store: sessionStore,
   resave: true,
   saveUninitialized: true,
-  store: MongoStore.create({mongoUrl: 'mongodb://127.0.0.1:27017/fnaf'})
-}))
+  cookie: { path: '/',
+  httpOnly: true,
+  maxAge: 60*1000
+  }
+}));
+
+// var MongoStore = require('connect-mongo'); (session);
+// app.use(session({
+//   secret: "fnaf",
+//   cookie: {maxAge:60*1000},
+//   resave: true,
+//   saveUninitialized: true,
+//   store: MongoStore.create({mongoUrl: 'mongodb://127.0.0.1:27017/fnaf'})
+// }))
+
 
 app.use(function(req, res, next){
   req.session.counter = req.session.counter +1 || 1,

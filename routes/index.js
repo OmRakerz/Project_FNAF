@@ -1,20 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-var Animatronic = require("../models/animatronic").Animatronic
-var User = require("./../models/user").User
-var checkAuth = require("./../middleware/checkAuth")
+var db = require('../mySQLConnect')
+// var Animatronic = require("../models/animatronic").Animatronic
+// var User = require("./../models/user").User
+// var checkAuth = require("./../middleware/checkAuth")
 
-/* GET home page(Главая страница). */
+/* GET home page  (Главая страница)/Счетчик. */
 router.get('/', function (req, res, next) {
-  Animatronic.find({}, { _id: 0, title: 1, nick: 1 }, function (err, menu) {
+  db.query(`SELECT title, nick FROM animatronics`, (err, menu) => {
     req.session.greeting = "Hi!!!",
     res.cookie('greeting', 'Hi!!!').render('index', { 
       title: 'Express',
       menu: menu,
       counter:req.session.counter
-    });
-  })
+    })
+  });
 });
 
 /* Страница регистрации */
@@ -32,14 +33,14 @@ router.post('/logreg', function(req, res, next){
   User.findOne({username:username},function(err,user){
     if(err) return next(err)
     if(user){
-	    if(user.checkPassword(password)){
+      if(user.checkPassword(password)){
         req.session.user = user._id
         res.redirect('/')
       } 
       else { res.render('logreg', {title: 'Вход', error:"Пароль не верный"})
       }
     } else {
-	    var user = new User({username:username,password:password})
+      var user = new User({username:username,password:password})
       user.save(function(err,user){
         if(err) return next(err)
           req.session.user = user._id
