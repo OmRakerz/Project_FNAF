@@ -3,15 +3,17 @@ var router = express.Router();
 
 var db = require('../mySQLConnect');
 // var Animatronic = require("../models/animatronic").Animatronic
-var async = require("async");
-// var checkAuth = require("./../middleware/checkAuth")
+// var async = require("async");
+
+var checkAuth = require("./../middleware/checkAuth")
 
     /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('Новый маршрутизатор, для маршрутов, начинающихся с animatronics')
 });
+
 /* Страница аниматроников на MySQL*/
-router.get('/:nick' ,function(req, res, next) {
+router.get('/:nick' ,checkAuth, function(req, res, next) {
     db.query(`SELECT * FROM animatronics WHERE animatronics.nick = '${req.params.nick}'`, (err, animatronics) => {
     if(err) {
         console.log(err);

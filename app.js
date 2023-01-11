@@ -53,7 +53,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { path: '/',
     httpOnly: true,
-  maxAge: 60*10000
+  maxAge: 60*1000
   }
 }));
 
@@ -75,7 +75,7 @@ app.use(session({
   // })
 
   app.use(function(req, res, next){
-    req.session.counter = req.session.counter +1 || 1,
+    req.session.counter = req.session.counter +1 || 1
     next()
   })
 
@@ -88,6 +88,7 @@ app.use('/users', usersRouter);
 app.use('/animatronics', animatronics)
 
 // catch 404 and forward to error handler
+// поймать 404 и отправить обработчику ошибок
 app.use(function(req, res, next) {
   next(createError(404));
 });
