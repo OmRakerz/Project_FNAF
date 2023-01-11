@@ -7,7 +7,7 @@ var db = require('../mySQLConnect.js');
 var checkAuth = require("./../middleware/checkAuth")
 
 /* GET home page  (Главая страница)/Счетчик. */
-router.get('/', checkAuth, function (req, res, next) {
+router.get('/', function (req, res, next) {
   db.query(`SELECT title, nick FROM animatronics`, (err, menu) => {
     req.session.greeting = "Hi!!!",
     res.cookie('greeting', 'Hi!!!').render('index', { 
@@ -30,7 +30,7 @@ router.post('/logreg', function(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
 
-  db.query(`SELECT * FROM user WHERE user.username = '${req.body.Username}'`, (err, users) => {
+  db.query(`SELECT * FROM user WHERE user.username = '${req.body.username}'`, (err, users) => {
     if(err) return next(err)
     if(users.length > 0){
       var user = users[0];

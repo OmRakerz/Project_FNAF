@@ -7,7 +7,7 @@ var db = require('../mySQLConnect');
 module.exports = function(req,res,next) {
     res.locals.user = null
 
-        next();
+       
         
         db.query(`SELECT * FROM user WHERE user.user_id = '${req.session.user}'`, (err, users) => {
             if (err)
