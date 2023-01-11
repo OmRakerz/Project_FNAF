@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var db = require('../mySQLConnect')
+var db = require('../mySQLConnect.js');
 // var Animatronic = require("../models/animatronic").Animatronic
 // var User = require("./../models/user").User
 var checkAuth = require("./../middleware/checkAuth")
 
 /* GET home page  (Главая страница)/Счетчик. */
-router.get('/', function (req, res, next) {
+router.get('/', checkAuth, function (req, res, next) {
   db.query(`SELECT title, nick FROM animatronics`, (err, menu) => {
     req.session.greeting = "Hi!!!",
     res.cookie('greeting', 'Hi!!!').render('index', { 
@@ -27,21 +27,21 @@ router.get('/logreg', function(req, res, next){
 })
 
 router.post('/logreg', function(req, res, next){
-  var Username = req.body.username;
-  var Password = req.body.password;
+  var username = req.body.username;
+  var password = req.body.password;
 
-  db.query(`SELECT * FROM user WHERE user.username = '${Username}'`, (err, users) => {
+  db.query(`SELECT * FROM user WHERE user.username = '${req.body.Username}'`, (err, users) => {
     if(err) return next(err)
     if(users.length > 0){
       var user = users[0];
-      if(Password == user.password){
-        req.session.user = user.user_id
-        res.redirect('/')
+      if(password == user.password){
+          req.session.user = user.user_id
+          res.redirect('/')
       } 
       else { res.render('logreg', {title: 'Вход', error:"Пароль не верный"})
       }
     } else {
-      db.query(`INSERT INTO user (username, password) VALUES ('${Username}', '${Password}')`, (err,user) =>{
+      db.query(`INSERT INTO user (username, password) VALUES ('${username}', '${password}')`, function(err,user){
         if (err) return next(err)
         req.session.user = user.user_id
         res.redirect('/')
@@ -53,7 +53,7 @@ router.post('/logreg', function(req, res, next){
 /* logout */
 router.post('/logout', function(req, res, next) {
   req.session.destroy()
-  res.locals.user = null
+  req.session.user = null
   res.redirect('/')
 });
 

@@ -4,17 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // var mongoose = require('mongoose');
+
+var session = require('express-session');
 var mysql2 = require('mysql2/promise');
 
 
 // mongoose.connect('mongodb://127.0.0.1:27017/fnaf')
 
-var session = require('express-session');
 
 var MySQLStore = require('express-mysql-session')(session);
 
 
-var Animatronic = require("./models/animatronic").Animatronic;
+// var Animatronic = require("./models/animatronic").Animatronic;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -34,6 +35,7 @@ var options = {
 
 
 // view engine setup
+app.engine('ejs', require('ejs-locals'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -41,7 +43,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
@@ -53,7 +56,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { path: '/',
     httpOnly: true,
-  maxAge: 60*1000
+    maxAge: 60*1000
   }
 }));
 
