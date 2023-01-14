@@ -11,7 +11,7 @@ database.dropDatabase()
 database = client.db("fnaf");
 const animatronics = database.collection("animatronics");
 const result = await animatronics.insertMany(data);
-console.log(`${result} documents were inserted`);
+console.log(`${result.insertedCount} documents were inserted`);
 } finally {
 await client.close();
 }
